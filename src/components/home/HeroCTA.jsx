@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function Hero() {
+function HeroCTA() {
   return (
     <section className="px-6 pt-24 pb-16 max-w-7xl mx-auto font-mono text-center">
       <h1 className="text-[#E4E6DE] text-3xl md:text-5xl font-medium tracking-tight mb-5 leading-tight">
@@ -21,4 +21,4 @@ function Hero() {
   );
 }
 
-export default Hero;
+export default HeroCTA;
