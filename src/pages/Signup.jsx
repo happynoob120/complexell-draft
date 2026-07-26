@@ -20,7 +20,7 @@ function Signup() {
         password,
       });
 
-      toast.success("Account created successfully!");
+      toast.success("Account created successfully!, Verify using Email");
 
       navigate("/");
     } catch (error) {

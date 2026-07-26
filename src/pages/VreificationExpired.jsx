@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Banner from "../components/beta/Banner";
 import { TbClockExclamation } from "react-icons/tb";
 import { resendVerification } from "../api/auth.api";
 
@@ -22,7 +21,6 @@ function VerificationExpired() {
 
   return (
     <>
-      <Banner />
 
       <div className="min-h-[calc(100vh-200px)] flex items-center justify-center bg-[#0D0F0C] px-6 font-mono">
         <div className="w-full max-w-md bg-[#15180F] border border-[#232820] rounded-xl p-8 text-center">
