@@ -7,8 +7,8 @@ function BetaBanner() {
         <TbRocket size={13} className="text-[#9FE6A0]" />
         <span>
           complexell is currently in{" "}
-          <span className="text-[#9FE6A0]">beta</span> — all features are free
-          while we build. no card required.
+          <span className="text-[#9FE6A0]">beta</span> — 
+          The foundation is ready. More is on the way.
         </span>
       </div>
     </div>

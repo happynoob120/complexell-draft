@@ -12,11 +12,20 @@ import About from "./pages/About.jsx";
 import Contact from "./pages/Contact.jsx";
 import Layout from "./components/layout/Layout.jsx";
 import ErrNotFound from "./pages/ErrNotFound.jsx";
+import { Toaster } from "react-hot-toast";
+import VerificationExpired from "./pages/VreificationExpired.jsx";
+import VerificationFailed from "./pages/VerificationFailed.jsx";
+import VerificationSuccess from "./pages/VerificationSuccess.jsx";
 
 const App = () => {
-
   return (
     <Layout>
+      <Toaster
+        position="top-center"
+        toastOptions={{
+          duration: 3000,
+        }}
+      ></Toaster>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<Signup />} />
@@ -26,6 +35,9 @@ const App = () => {
         <Route path="/articles" element={<Articles />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<ErrNotFound />} />
+        <Route path="/verification-success" element={<VerificationSuccess />} />
+        <Route path="/verification-failed" element={<VerificationFailed />} />
+        <Route path="/verification-expired" element={<VerificationExpired />} />
       </Routes>
     </Layout>
   );

@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import {
   TbFileText,
   TbTag,
@@ -7,57 +7,143 @@ import {
   TbSearch,
   TbMenu2,
   TbX,
+  TbUserCircle,
+  TbLogout,
 } from "react-icons/tb";
+
 import logoIcon from "../../assets/logo-icon.png";
+import { getCurrentUser, logout } from "../../api/auth.api";
 
 function Navbar() {
+  const navigate = useNavigate();
+
   const [isOpen, setIsOpen] = useState(false);
+  const [user, setUser] = useState(null);
+  const [showMenu, setShowMenu] = useState(false);
+
+  useEffect(() => {
+    fetchCurrentUser();
+
+    const updateUser = () => {
+      fetchCurrentUser();
+    };
+
+    window.addEventListener("authChanged", updateUser);
+
+    return () => {
+      window.removeEventListener("authChanged", updateUser);
+    };
+  }, []);
+
+  const fetchCurrentUser = async () => {
+    try {
+      const data = await getCurrentUser();
+      setUser(data.user);
+    } catch {
+      setUser(null);
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+
+      setUser(null);
+      setShowMenu(false);
+      setIsOpen(false);
+
+      window.dispatchEvent(new Event("authChanged"));
+
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const closeMobileMenu = () => {
+    setIsOpen(false);
+  };
 
   return (
     <header className="bg-[#0D0F0C] border-b border-[#1F231C] font-mono">
-      {/* Top tier — text (left) + centered icon + auth (right) */}
-      <div className="relative flex items-center justify-between px-6 pt-5 pb-3.5">
-        <Link to="/" className="flex items-baseline gap-0.5">
-          <span className="text-[#9FE6A0] text-lg font-medium">complexell</span>
-          <span className="text-[#3A4036] text-sm">.souel.in</span>
-        </Link>
-
-        {/* Centered icon — absolutely positioned so it stays centered regardless of side content width */}
+      {/* Top */}
+      <div className="relative flex items-center justify-between px-5 md:px-6 pt-5 pb-3.5">
         <Link
           to="/"
-          className="absolute left-1/2 -translate-x-1/2 flex items-center"
+          onClick={closeMobileMenu}
+          className="flex items-baseline gap-0.5"
         >
-          <img src={logoIcon} alt="Complexell logo" className="h-10 w-10 rounded-4xl" />
+          <span className="text-[#9FE6A0] text-base md:text-lg font-medium">
+            complexell
+          </span>
+          <span className="text-[#3A4036] text-xs md:text-sm">.souel.in</span>
         </Link>
 
-        <div className="hidden md:flex items-center gap-3.5">
-          <Link
-            to="/login"
-            className="text-[#8A9180] hover:text-[#E4E6DE] text-sm transition-colors"
-          >
-            login
-          </Link>
-          <Link
-            to="/signup"
-            className="bg-[#9FE6A0] text-[#0D0F0C] text-sm font-medium px-4 py-1.5 rounded hover:opacity-90 transition-opacity"
-          >
-            signup
-          </Link>
+        <Link
+          to="/"
+          onClick={closeMobileMenu}
+          className="absolute left-1/2 -translate-x-1/2"
+        >
+          <img
+            src={logoIcon}
+            alt="Complexell"
+            className="w-9 h-9 md:w-10 md:h-10 rounded-full"
+          />
+        </Link>
+
+        {/* Desktop Auth */}
+        <div className="hidden md:flex items-center gap-4">
+          {user ? (
+            <div
+              className="relative pb-2"
+              onMouseEnter={() => setShowMenu(true)}
+              onMouseLeave={() => setShowMenu(false)}
+            >
+              <button className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#232820] hover:border-[#9FE6A0] transition">
+                <TbUserCircle size={22} className="text-[#9FE6A0]" />
+
+                <span className="text-[#E4E6DE] text-sm">{user.username}</span>
+              </button>
+
+              {showMenu && (
+                <div className="absolute right-0 top-full w-44 rounded-lg overflow-hidden border border-[#232820] bg-[#15180F] shadow-xl z-50">
+                  <button
+                    onClick={handleLogout}
+                    className="w-full flex items-center gap-2 px-4 py-3 text-[#E4E6DE] hover:bg-[#232820] transition"
+                  >
+                    <TbLogout />
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
+          ) : (
+            <>
+              <Link to="/login" className="text-[#8A9180] hover:text-[#E4E6DE]">
+                login
+              </Link>
+
+              <Link
+                to="/signup"
+                className="bg-[#9FE6A0] text-[#0D0F0C] px-4 py-1.5 rounded text-sm font-medium hover:opacity-90"
+              >
+                signup
+              </Link>
+            </>
+          )}
         </div>
 
-        {/* Mobile menu toggle */}
+        {/* Mobile Button */}
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="md:hidden text-[#E4E6DE]"
-          aria-label="Toggle menu"
         >
-          {isOpen ? <TbX size={20} /> : <TbMenu2 size={20} />}
+          {isOpen ? <TbX size={22} /> : <TbMenu2 size={22} />}
         </button>
       </div>
-
-      {/* Bottom tier — nav links + search (desktop) */}
-      <div className="hidden md:flex items-center justify-between px-6 py-2.5 border-t border-[#1A1D16]">
-        <div className="flex items-center gap-5 text-sm">
+      {/* Desktop Navigation */}
+      <div className="hidden md:flex justify-between items-center px-6 py-2.5 border-t border-[#1A1D16]">
+        <div className="flex gap-5 text-sm">
           <Link
             to="/articles"
             className="flex items-center gap-1.5 text-[#E4E6DE]"
@@ -65,75 +151,119 @@ function Navbar() {
             <TbFileText size={14} />
             articles
           </Link>
+
           <Link
             to="/pricing"
-            className="flex items-center gap-1.5 text-[#8A9180] hover:text-[#E4E6DE] transition-colors"
+            className="flex items-center gap-1.5 text-[#8A9180] hover:text-[#E4E6DE]"
           >
             <TbTag size={14} />
             pricing
           </Link>
+
           <Link
             to="/about"
-            className="flex items-center gap-1.5 text-[#8A9180] hover:text-[#E4E6DE] transition-colors"
+            className="flex items-center gap-1.5 text-[#8A9180] hover:text-[#E4E6DE]"
           >
             <TbInfoCircle size={14} />
             about
           </Link>
         </div>
 
-        <button className="flex items-center gap-2 bg-[#15180F] border border-[#232820] rounded px-2.5 py-1.5 text-xs text-[#5C6358] hover:border-[#2F362A] transition-colors">
+        <button className="flex items-center gap-2 bg-[#15180F] border border-[#232820] rounded px-2.5 py-1.5 text-xs text-[#5C6358]">
           <TbSearch size={14} />
           <span>search errors</span>
-          <span className="ml-2 border border-[#2A2F25] rounded text-[10px] px-1.5 py-0.5 text-[#4A5042]">
+
+          <span className="border border-[#2A2F25] rounded px-1.5 py-0.5">
             ⌘K
           </span>
         </button>
-      </div>
-
-      {/* Mobile dropdown */}
+      </div>{" "}
+      {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden flex flex-col gap-1 px-6 pb-4 border-t border-[#1A1D16] pt-3 text-sm">
-          <button className="flex items-center gap-2 bg-[#15180F] border border-[#232820] rounded px-2.5 py-2 text-xs text-[#5C6358] mb-3">
-            <TbSearch size={14} />
-            <span>search errors</span>
-          </button>
+        <div className="md:hidden border-t border-[#1A1D16] bg-[#0D0F0C]">
+          <div className="px-5 py-4 flex flex-col gap-2">
+            {/* Search */}
+            <button className="flex items-center gap-2 bg-[#15180F] border border-[#232820] rounded-md px-3 py-3 text-sm text-[#5C6358]">
+              <TbSearch size={16} />
+              <span>search errors</span>
+            </button>
 
-          <Link
-            to="/articles"
-            className="flex items-center gap-2 text-[#E4E6DE] py-2"
-          >
-            <TbFileText size={14} />
-            articles
-          </Link>
-          <Link
-            to="/pricing"
-            className="flex items-center gap-2 text-[#8A9180] py-2"
-          >
-            <TbTag size={14} />
-            pricing
-          </Link>
-          <Link
-            to="/about"
-            className="flex items-center gap-2 text-[#8A9180] py-2"
-          >
-            <TbInfoCircle size={14} />
-            about
-          </Link>
-
-          <div className="flex items-center gap-3 pt-3 mt-1 border-t border-[#1A1D16]">
-            <Link to="/login" className="text-[#8A9180] text-sm">
-              login
-            </Link>
+            {/* Navigation */}
             <Link
-              to="/signup"
-              className="bg-[#9FE6A0] text-[#0D0F0C] text-sm font-medium px-4 py-1.5 rounded"
+              to="/articles"
+              onClick={closeMobileMenu}
+              className="flex items-center gap-3 px-2 py-3 rounded text-[#E4E6DE] hover:bg-[#15180F]"
             >
-              signup
+              <TbFileText size={18} />
+              <span>Articles</span>
             </Link>
+
+            <Link
+              to="/pricing"
+              onClick={closeMobileMenu}
+              className="flex items-center gap-3 px-2 py-3 rounded text-[#E4E6DE] hover:bg-[#15180F]"
+            >
+              <TbTag size={18} />
+              <span>Pricing</span>
+            </Link>
+
+            <Link
+              to="/about"
+              onClick={closeMobileMenu}
+              className="flex items-center gap-3 px-2 py-3 rounded text-[#E4E6DE] hover:bg-[#15180F]"
+            >
+              <TbInfoCircle size={18} />
+              <span>About</span>
+            </Link>
+
+            <div className="border-t border-[#232820] mt-3 pt-4">
+              {user ? (
+                <>
+                  <div className="flex items-center gap-3 mb-4">
+                    <TbUserCircle size={32} className="text-[#9FE6A0]" />
+
+                    <div>
+                      <p className="text-[#E4E6DE] font-medium">
+                        {user.username}
+                      </p>
+
+                      <p className="text-[#6F756A] text-xs">{user.email}</p>
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={handleLogout}
+                    className="w-full flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white rounded-md py-3 transition"
+                  >
+                    <TbLogout size={18} />
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <div className="flex flex-col gap-3">
+                  <Link
+                    to="/login"
+                    onClick={closeMobileMenu}
+                    className="text-center border border-[#232820] rounded-md py-3 text-[#E4E6DE] hover:border-[#9FE6A0]"
+                  >
+                    Login
+                  </Link>
+
+                  <Link
+                    to="/signup"
+                    onClick={closeMobileMenu}
+                    className="text-center bg-[#9FE6A0] text-[#0D0F0C] rounded-md py-3 font-medium"
+                  >
+                    Sign Up
+                  </Link>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       )}
     </header>
   );
 }
+
 export default Navbar;

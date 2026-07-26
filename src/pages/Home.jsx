@@ -7,13 +7,11 @@ import PricingTeaser from '../components/home/Pricingteaser.jsx'
 import FinalCTA from '../components/home/Finalcta.jsx'
 import Footer from '../components/layout/Footer.jsx'
 import HeroCTA from '../components/home/HeroCTA.jsx'
-import Banner from '../components/beta/Banner.jsx'
 
 const Home = () => {
   return (
     <>
     <AddressBar />
-    <Banner />
     <HeroCTA />
     <FeatruredArticles />
     <WhyComplexell />

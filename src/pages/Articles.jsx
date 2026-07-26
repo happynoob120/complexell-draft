@@ -1,13 +1,11 @@
 import AddressBar from "../components/layout/AddressBar.jsx";
 import ArticleCard from "../components/layout/ArticleCard.jsx";
 import ArticleSearchBar from "../components/articles/Articlesearchbar.jsx";
-import Banner from "../components/beta/Banner.jsx";
 function Articles() {
   return (
     <>
     
       <AddressBar />
-      <Banner />
       <ArticleSearchBar />
 
       <section className="px-6 py-16 max-w-7xl mx-auto font-mono">

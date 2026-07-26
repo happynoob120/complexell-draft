@@ -10,10 +10,10 @@ function BetaCTA() {
           <TbRocket size={24} className="text-[#9FE6A0] mt-0.5 shrink-0" />
           <div>
             <h3 className="text-[#E4E6DE] text-base font-medium mb-1">
-              we're in beta — everything is free for now.
+              we're in beta — Beta Release
             </h3>
             <p className="text-[#8A9180] text-sm leading-relaxed max-w-lg">
-              pricing hasn't launched yet. while we're in beta, all features are completely free. no card required, no hidden limits. enjoy it while it lasts.
+              Complexell is currently under active development. Some features may be incomplete as we continue building a better experience for developers.
             </p>
           </div>
         </div>
