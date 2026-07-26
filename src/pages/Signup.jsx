@@ -12,6 +12,7 @@ function Signup() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    toast.loading("Please Wait...")
 
     try {
       const data = await signup({
@@ -19,7 +20,6 @@ function Signup() {
         email,
         password,
       });
-
       toast.success("Account created successfully!, Verify using Email");
 
       navigate("/");

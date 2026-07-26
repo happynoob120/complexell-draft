@@ -19,6 +19,7 @@ function Login() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    toast.loading("Please Wait...")
 
     try {
       await login({
