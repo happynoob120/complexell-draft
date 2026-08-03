@@ -168,25 +168,12 @@ function Navbar() {
             about
           </Link>
         </div>
-
-        <button className="flex items-center gap-2 bg-[#15180F] border border-[#232820] rounded px-2.5 py-1.5 text-xs text-[#5C6358]">
-          <TbSearch size={14} />
-          <span>search errors</span>
-
-          <span className="border border-[#2A2F25] rounded px-1.5 py-0.5">
-            ⌘K
-          </span>
-        </button>
       </div>{" "}
       {/* Mobile Menu */}
       {isOpen && (
         <div className="md:hidden border-t border-[#1A1D16] bg-[#0D0F0C]">
           <div className="px-5 py-4 flex flex-col gap-2">
             {/* Search */}
-            <button className="flex items-center gap-2 bg-[#15180F] border border-[#232820] rounded-md px-3 py-3 text-sm text-[#5C6358]">
-              <TbSearch size={16} />
-              <span>search errors</span>
-            </button>
 
             {/* Navigation */}
             <Link

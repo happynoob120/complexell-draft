@@ -16,7 +16,9 @@ import { Toaster } from "react-hot-toast";
 import VerificationExpired from "./pages/VreificationExpired.jsx";
 import VerificationFailed from "./pages/VerificationFailed.jsx";
 import VerificationSuccess from "./pages/VerificationSuccess.jsx";
-
+import Article from "./pages/Article.jsx";
+import WriteArticle from "./pages/WriteArticle";
+import MyArticles from "./pages/MyArticles.jsx"
 const App = () => {
   return (
     <Layout>
@@ -38,6 +40,10 @@ const App = () => {
         <Route path="/verification-success" element={<VerificationSuccess />} />
         <Route path="/verification-failed" element={<VerificationFailed />} />
         <Route path="/verification-expired" element={<VerificationExpired />} />
+        <Route path="/articles/new" element={<WriteArticle />} />
+        <Route path="/articles/:slug" element={<Article />} />
+        <Route path="/articles/mine" element={<MyArticles />} />
+        <Route path="/articles/edit/:id" element={<WriteArticle />} />
       </Routes>
     </Layout>
   );

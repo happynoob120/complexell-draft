@@ -1,0 +1,321 @@
+/* ===========================
+   Editor Wrapper
+=========================== */
+
+.editor-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* ===========================
+   Toolbar
+=========================== */
+
+.editor-toolbar {
+  position: sticky;
+  top: 90px;
+  z-index: 50;
+}
+
+/* ===========================
+   Main Editor
+=========================== */
+
+.editor-content,
+.ProseMirror {
+  min-height: 700px;
+
+  color: #e8ece4;
+
+  font-size: 20px;
+
+  line-height: 2;
+
+  letter-spacing: 0.01em;
+
+  outline: none;
+
+  caret-color: #8be17b;
+}
+
+/* ===========================
+   Placeholder
+=========================== */
+
+.editor-content p.is-editor-empty:first-child::before,
+.ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+
+  color: #5a6255;
+
+  pointer-events: none;
+
+  float: left;
+
+  height: 0;
+}
+
+/* ===========================
+   Paragraph
+=========================== */
+
+.editor-content p,
+.ProseMirror p {
+  margin: 1.4rem 0;
+
+  color: #d9ded5;
+
+  font-weight: 400;
+}
+
+/* ===========================
+   Headings
+=========================== */
+
+.editor-content h1,
+.ProseMirror h1 {
+  font-size: 3.8rem;
+
+  line-height: 1;
+
+  margin: 3rem 0 1.5rem;
+
+  font-weight: 900;
+
+  letter-spacing: -0.06em;
+
+  color: white;
+}
+
+.editor-content h2,
+.ProseMirror h2 {
+  font-size: 2.7rem;
+
+  line-height: 1.1;
+
+  margin: 2.5rem 0 1rem;
+
+  font-weight: 800;
+
+  letter-spacing: -0.04em;
+
+  color: white;
+}
+
+.editor-content h3,
+.ProseMirror h3 {
+  font-size: 2rem;
+
+  margin: 2rem 0 1rem;
+
+  font-weight: 700;
+
+  color: white;
+}
+
+/* ===========================
+   Lists
+=========================== */
+
+.editor-content ul,
+.editor-content ol,
+.ProseMirror ul,
+.ProseMirror ol {
+  margin: 1.5rem 0;
+
+  padding-left: 2rem;
+}
+
+.editor-content li,
+.ProseMirror li {
+  margin: 0.8rem 0;
+}
+
+.editor-content li::marker,
+.ProseMirror li::marker {
+  color: #8be17b;
+}
+
+/* ===========================
+   Blockquote
+=========================== */
+
+.editor-content blockquote,
+.ProseMirror blockquote {
+  margin: 2.5rem 0;
+
+  padding: 1rem 1.5rem;
+
+  border-left: 4px solid #8be17b;
+
+  background: rgba(139, 225, 123, 0.05);
+
+  border-radius: 0 12px 12px 0;
+
+  color: #bac5b2;
+
+  font-style: italic;
+}
+
+/* ===========================
+   Code Block
+=========================== */
+
+.editor-content pre,
+.ProseMirror pre {
+  background: #171b12;
+
+  border: 1px solid #2a3025;
+
+  border-radius: 18px;
+
+  padding: 1.4rem;
+
+  overflow-x: auto;
+
+  margin: 2rem 0;
+}
+
+.editor-content pre code,
+.ProseMirror pre code {
+  background: transparent;
+
+  border: none;
+
+  color: #e4e6de;
+
+  font-size: 0.95rem;
+
+  font-family: "Fira Code", monospace;
+}
+
+/* ===========================
+   Inline Code
+=========================== */
+
+.editor-content code,
+.ProseMirror code {
+  background: #23281d;
+
+  border: 1px solid #353d30;
+
+  border-radius: 6px;
+
+  padding: 0.2rem 0.45rem;
+
+  font-size: 0.9rem;
+}
+
+/* ===========================
+   Horizontal Rule
+=========================== */
+
+.editor-content hr,
+.ProseMirror hr {
+  border: none;
+
+  border-top: 1px solid #2a3025;
+
+  margin: 3rem 0;
+}
+
+/* ===========================
+   Links
+=========================== */
+
+.editor-content a,
+.ProseMirror a {
+  color: #8be17b;
+
+  text-decoration: underline;
+}
+
+/* ===========================
+   Images
+=========================== */
+
+.editor-content img,
+.ProseMirror img {
+  width: 100%;
+
+  border-radius: 18px;
+
+  margin: 2rem 0;
+}
+
+/* ===========================
+   Text Selection
+=========================== */
+
+.editor-content ::selection {
+  background: rgba(139, 225, 123, 0.28);
+}
+
+/* ===========================
+   Scrollbar
+=========================== */
+
+.editor-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.editor-content::-webkit-scrollbar-thumb {
+  background: #2a3025;
+
+  border-radius: 20px;
+}
+
+/* ===========================
+   Responsive
+=========================== */
+
+@media (max-width: 768px) {
+  .editor-content,
+  .ProseMirror {
+    font-size: 18px;
+  }
+
+  .editor-content h1,
+  .ProseMirror h1 {
+    font-size: 2.8rem;
+  }
+
+  .editor-content h2,
+  .ProseMirror h2 {
+    font-size: 2.2rem;
+  }
+
+  .editor-content h3,
+  .ProseMirror h3 {
+    font-size: 1.7rem;
+  }
+}
+.editor-content ul,
+.ProseMirror ul {
+  list-style-type: disc;
+  padding-left: 2rem;
+  margin: 1.5rem 0;
+}
+
+.editor-content ol,
+.ProseMirror ol {
+  list-style-type: decimal;
+  padding-left: 2rem;
+  margin: 1.5rem 0;
+}
+
+.editor-content li,
+.ProseMirror li {
+  display: list-item;
+  margin: 0.6rem 0;
+}
+
+.editor-content ul ul,
+.ProseMirror ul ul {
+  list-style-type: circle;
+}
+
+.editor-content ul ul ul,
+.ProseMirror ul ul ul {
+  list-style-type: square;
+}

@@ -1,33 +1,116 @@
 import { Link } from "react-router-dom";
-import { TbClock, TbEye } from "react-icons/tb";
+import { TbArrowRight, TbClock, TbEye } from "react-icons/tb";
 
-function ArticleCard() {
+function ArticleCard({ article }) {
   return (
     <Link
-      to={`/`}
-      className="block bg-[#15180F] border border-[#232820] rounded-md p-5 hover:border-[#2F362A] transition-colors font-mono"
-    >
-      <h3 className="text-[#E4E6DE] text-base font-medium mb-2 line-clamp-2">
-        Article Title
-      </h3>
+      to={`/articles/${article.slug}`}
+      className="
+        group
+        block
 
-      <p className="text-[#8A9180] text-sm leading-relaxed mb-4 line-clamp-2">
-        This is a brief description of the article. It provides a summary of the
-        content and entices readers to click and read more. The description is
-        concise and informative, giving readers an idea of what to expect in the
-        article.
+        rounded-2xl
+
+        border
+        border-transparent
+
+        px-6
+        py-7
+
+        transition-all
+        duration-300
+
+        hover:bg-[#15180F]
+        hover:border-[#2A3025]
+      "
+    >
+      {/* Label */}
+
+      <p className="text-[11px] uppercase tracking-[0.28em] text-[#73C66C]">
+        Article
       </p>
 
-      <div className="flex items-center gap-4 text-xs text-[#5C6358]">
-        <span>21/6/2026</span>
-        <span className="flex items-center gap-1">
-          <TbClock size={13} />
-          4:21pm
-        </span>
-        <span className="flex items-center gap-1">
-          <TbEye size={13} />
-          5,000
-        </span>
+      {/* Title */}
+
+      <h3
+        className="
+          mt-4
+
+          text-2xl
+
+          font-bold
+
+          leading-snug
+
+          text-white
+
+          transition-colors
+
+          group-hover:text-[#DCE6CF]
+        "
+      >
+        {article.article_title}
+      </h3>
+
+      {/* Context */}
+
+      <p
+        className="
+          mt-4
+
+          text-[15px]
+
+          leading-8
+
+          text-[#8C9285]
+
+          line-clamp-3
+        "
+      >
+        {article.article_context}
+      </p>
+
+      {/* Divider */}
+
+      <div className="mt-7 h-px bg-[#232820]" />
+
+      {/* Footer */}
+
+      <div className="mt-5 flex items-center justify-between">
+        <div>
+          <p className="text-sm text-[#D8DDD2]">
+            {article.author?.username || "Unknown"}
+          </p>
+
+          <div className="mt-2 flex gap-5 text-sm text-[#6F7668]">
+            <span className="flex items-center gap-1">
+              <TbClock />
+              {new Date(article.createdAt).toLocaleDateString("en-IN", {
+                day: "numeric",
+                month: "short",
+                year: "numeric",
+              })}
+            </span>
+
+            <span className="flex items-center gap-1">
+              <TbEye />
+              {article.views}
+            </span>
+          </div>
+        </div>
+
+        <TbArrowRight
+          size={22}
+          className="
+            text-[#8BE17B]
+
+            transition-transform
+
+            duration-300
+
+            group-hover:translate-x-2
+          "
+        />
       </div>
     </Link>
   );

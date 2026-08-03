@@ -11,9 +11,7 @@ import HeroCTA from '../components/home/HeroCTA.jsx'
 const Home = () => {
   return (
     <>
-    <AddressBar />
     <HeroCTA />
-    <FeatruredArticles />
     <WhyComplexell />
     <PricingTeaser />
     <FinalCTA />

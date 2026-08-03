@@ -6,7 +6,6 @@ function Layout({ children }) {
   return (
     <div className="min-h-screen flex flex-col bg-[#0D0F0C]">
       <Navbar />
-      <BetaBanner />
       <main className="flex-1">{children}</main>
       <Footer />
     </div>
