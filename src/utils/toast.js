@@ -9,12 +9,17 @@ const baseStyle = {
   boxShadow: "0 6px 18px rgba(0,0,0,0.5)",
 };
 
+export const toastOptions = {
+  duration: 4000,
+  style: baseStyle,
+};
+
 const toast = {
-  success: (msg, opts = {}) => rawToast.success(msg, { style: baseStyle, ...opts }),
-  error: (msg, opts = {}) => rawToast.error(msg, { style: baseStyle, ...opts }),
-  loading: (msg, opts = {}) => rawToast.loading(msg, { style: baseStyle, ...opts }),
+  success: (msg, opts = {}) => rawToast.success(msg, { ...toastOptions, ...opts }),
+  error: (msg, opts = {}) => rawToast.error(msg, { ...toastOptions, ...opts }),
+  loading: (msg, opts = {}) => rawToast.loading(msg, { ...toastOptions, ...opts }),
   dismiss: (id) => rawToast.dismiss(id),
-  custom: (cb, opts = {}) => rawToast.custom(cb, { duration: 8000, ...opts }),
+  custom: (cb, opts = {}) => rawToast.custom(cb, { duration: 8000, ...toastOptions, ...opts }),
   raw: rawToast,
 };
 

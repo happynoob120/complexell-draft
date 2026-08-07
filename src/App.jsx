@@ -13,6 +13,7 @@ import Contact from "./pages/Contact.jsx";
 import Layout from "./components/layout/Layout.jsx";
 import ErrNotFound from "./pages/ErrNotFound.jsx";
 import { Toaster } from "react-hot-toast";
+import { toastOptions } from "./utils/toast";
 import VerificationExpired from "./pages/VreificationExpired.jsx";
 import VerificationFailed from "./pages/VerificationFailed.jsx";
 import VerificationSuccess from "./pages/VerificationSuccess.jsx";
@@ -22,12 +23,7 @@ import MyArticles from "./pages/MyArticles.jsx"
 const App = () => {
   return (
     <Layout>
-      <Toaster
-        position="top-center"
-        toastOptions={{
-          duration: 3000,
-        }}
-      ></Toaster>
+      <Toaster position="top-center" toastOptions={toastOptions} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<Signup />} />
