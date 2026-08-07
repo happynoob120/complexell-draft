@@ -71,24 +71,21 @@ function Navbar() {
         <Link
           to="/"
           onClick={closeMobileMenu}
-          className="flex items-baseline gap-0.5"
-        >
-          <span className="text-[#9FE6A0] text-base md:text-lg font-medium">
-            complexell
-          </span>
-          <span className="text-[#3A4036] text-xs md:text-sm">.souel.in</span>
-        </Link>
-
-        <Link
-          to="/"
-          onClick={closeMobileMenu}
-          className="absolute left-1/2 -translate-x-1/2"
+          className="flex items-center gap-3"
         >
           <img
             src={logoIcon}
             alt="Complexell"
             className="w-9 h-9 md:w-10 md:h-10 rounded-full"
           />
+
+          <div className="flex flex-col leading-none">
+            <div className="flex items-baseline gap-0.5">
+              <span className="text-[#9FE6A0] text-base md:text-lg font-medium">complexell</span>
+              <span className="text-[#3A4036] text-xs md:text-sm">.souel.in</span>
+            </div>
+            <span className="text-[#DCE6CF] font-semibold uppercase tracking-[0.22em] text-[11px] md:text-xs mt-0.5">an enterprise of Souel</span>
+          </div>
         </Link>
 
         {/* Desktop Auth */}

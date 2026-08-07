@@ -4,7 +4,7 @@ import ArticleSearchBar from "../components/articles/Articlesearchbar.jsx";
 import Button from "../components/articles/ArticleButton.jsx";
 import FeaturedArticle from "../components/articles/FeaturedArticle.jsx";
 import ArticlesFeed from "../components/articles/ArticlesFeed.jsx";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { getArticles, getFeaturedArticle } from "../api/article.api";
 import ArticleCardSkeleton from "../components/articles/ArticleCardSkeleton.jsx";
 import FeaturedArticleSkeleton from "../components/articles/FeaturedArticleSkeleton";
@@ -12,26 +12,53 @@ function Articles() {
   const [articles, setArticles] = useState([]);
   const [featuredArticle, setFeaturedArticle] = useState("");
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(false);
+  const [query, setQuery] = useState("");
   useEffect(() => {
-    const fetchArticles = async () => {
+    const fetchFeatured = async () => {
       try {
-        const response = await getArticles();
         const featuredResponse = await getFeaturedArticle();
-        setArticles(response.articles);
         setFeaturedArticle(featuredResponse.article);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchFeatured();
+  }, []);
+
+  const fetchPage = useCallback(
+    async (p = 1, q = "", append = false) => {
+      setLoading(true);
+      try {
+        const response = await getArticles(p, 6, q);
+
+        if (append) {
+          setArticles((prev) => [...prev, ...response.articles]);
+        } else {
+          setArticles(response.articles);
+        }
+
+        setHasMore(response.hasMore);
       } catch (error) {
         console.error(error);
       } finally {
         setLoading(false);
       }
-    };
+    },
+    [],
+  );
 
-    fetchArticles();
-  }, []);
+  useEffect(() => {
+    // When query changes, reset to page 1 and fetch
+    setPage(1);
+    fetchPage(1, query, false);
+  }, [query, fetchPage]);
   return (
     <>
       <div className="max-w-7xl mx-auto px-6 lg:px-10 mt-8 mb-14">
-        <ArticleSearchBar />
+        <ArticleSearchBar onSearch={setQuery} initialQuery={query} />
       </div>
       <section className="max-w-full mx-auto px-4 sm:px-6 lg:px-10 mt-8 mb-14">
         {loading ? (
@@ -65,7 +92,11 @@ function Articles() {
             ))}
           </div>
         ) : (
-          <ArticlesFeed articles={articles} />
+          <ArticlesFeed articles={articles} loading={loading} hasMore={hasMore} onLoadMore={async () => {
+            const next = page + 1;
+            setPage(next);
+            await fetchPage(next, query, true);
+          }} />
         )}
       </section>
     </>

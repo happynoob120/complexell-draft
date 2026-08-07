@@ -13,10 +13,13 @@ function Footer() {
           <div className="col-span-2">
             <Link to="/" className="flex items-center gap-2 mb-3">
               <img src={logoIcon} alt="Complexell logo" className="h-7 w-7" />
-              <span className="flex items-baseline gap-0.5">
-                <span className="text-[#9FE6A0] text-lg font-medium">complexell</span>
-                <span className="text-[#3A4036] text-sm">.dev</span>
-              </span>
+              <div className="flex flex-col">
+                <span className="flex items-baseline gap-0.5">
+                  <span className="text-[#9FE6A0] text-lg font-medium">complexell</span>
+                  <span className="text-[#3A4036] text-sm">.souel.in</span>
+                </span>
+                <span className="text-[#DCE6CF] font-semibold uppercase tracking-[0.22em] text-[11px] md:text-xs mt-0.5">an enterprise of Souel</span>
+              </div>
             </Link>
             <p className="text-[#8A9180] text-sm leading-relaxed max-w-xs">
               curated, stack-specific fixes for developers who'd rather ship than search.

@@ -1,7 +1,18 @@
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { TbPencilPlus, TbSearch, TbArticle } from "react-icons/tb";
 
-function ArticleSearchBar() {
+function ArticleSearchBar({ onSearch, initialQuery = "" }) {
+  const [value, setValue] = useState(initialQuery);
+
+  useEffect(() => {
+    const t = setTimeout(() => {
+      onSearch && onSearch(value.trim());
+    }, 450);
+
+    return () => clearTimeout(t);
+  }, [value, onSearch]);
+
   return (
     <div className="flex flex-col lg:flex-row gap-4 mb-14">
       {/* Search */}
@@ -35,6 +46,8 @@ function ArticleSearchBar() {
 
         <input
           type="text"
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
           placeholder="Search articles..."
           className="
             flex-1

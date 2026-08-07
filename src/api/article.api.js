@@ -5,8 +5,9 @@ export const createArticle = async (articleData) => {
   return response.data;
 };
 
-export const getArticles = async (page = 1, limit = 6) => {
-  const response = await api.get(`/articles?page=${page}&limit=${limit}`);
+export const getArticles = async (page = 1, limit = 6, q = "") => {
+  const query = `?page=${page}&limit=${limit}${q ? `&q=${encodeURIComponent(q)}` : ""}`;
+  const response = await api.get(`/articles${query}`);
   return response.data;
 };
 
