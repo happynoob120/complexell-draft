@@ -9,15 +9,7 @@ function ArticlesFeed({
 }) {
   return (
     <>
-      <div
-        className="
-          grid
-          [grid-template-columns:repeat(auto-fit,minmax(520px,1fr))]
-          gap-8
-          max-w-7xl
-          mx-auto
-        "
-      >
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 w-full">
         {articles.map((article) => (
           <ArticleCard
             key={article._id}

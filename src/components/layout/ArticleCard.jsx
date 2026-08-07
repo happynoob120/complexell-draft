@@ -6,23 +6,23 @@ function ArticleCard({ article }) {
     <Link
       to={`/articles/${article.slug}`}
       className="
-        group
-        block
+group
+block
 
-        rounded-2xl
+rounded-2xl
 
-        border
-        border-transparent
+border
+border-transparent
 
-        px-6
-        py-7
+px-4 py-5
+sm:px-6 sm:py-7
 
-        transition-all
-        duration-300
+transition-all
+duration-300
 
-        hover:bg-[#15180F]
-        hover:border-[#2A3025]
-      "
+hover:bg-[#15180F]
+hover:border-[#2A3025]
+"
     >
       {/* Label */}
 
@@ -36,7 +36,7 @@ function ArticleCard({ article }) {
         className="
           mt-4
 
-          text-2xl
+          text-xl sm:text-2xl
 
           font-bold
 
@@ -58,7 +58,8 @@ function ArticleCard({ article }) {
         className="
           mt-4
 
-          text-[15px]
+          text-sm sm:text-[15px]
+leading-7 sm:leading-8
 
           leading-8
 
@@ -76,13 +77,13 @@ function ArticleCard({ article }) {
 
       {/* Footer */}
 
-      <div className="mt-5 flex items-center justify-between">
+      <div className="mt-5 flex items-start justify-between gap-4">
         <div>
           <p className="text-sm text-[#D8DDD2]">
             {article.author?.username || "Unknown"}
           </p>
 
-          <div className="mt-2 flex gap-5 text-sm text-[#6F7668]">
+          <div className="mt-2 flex flex-wrap gap-3 text-xs sm:text-sm text-[#6F7668]">
             <span className="flex items-center gap-1">
               <TbClock />
               {new Date(article.createdAt).toLocaleDateString("en-IN", {

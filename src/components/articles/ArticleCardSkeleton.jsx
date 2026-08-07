@@ -1,24 +1,25 @@
 function ArticleCardSkeleton() {
   return (
-    <div className="animate-pulse rounded-2xl border border-[#232820] p-6">
-      <div className="h-3 w-20 rounded bg-[#232820]" />
+    <div className="rounded-2xl px-6 py-7 animate-pulse">
+      <div className="h-3 w-16 rounded bg-[#232820]" />
 
-      <div className="mt-5 h-8 w-4/5 rounded bg-[#232820]" />
+      <div className="mt-5 h-8 w-3/4 rounded bg-[#232820]" />
 
-      <div className="mt-6 space-y-3">
-        <div className="h-3 rounded bg-[#232820]" />
-        <div className="h-3 w-11/12 rounded bg-[#232820]" />
+      <div className="mt-5 space-y-3">
+        <div className="h-4 rounded bg-[#232820]" />
+        <div className="h-4 rounded bg-[#232820]" />
+        <div className="h-4 w-5/6 rounded bg-[#232820]" />
       </div>
 
-      <div className="mt-8 h-px bg-[#232820]" />
+      <div className="mt-7 h-px bg-[#232820]" />
 
       <div className="mt-5 flex justify-between">
         <div className="space-y-2">
-          <div className="h-3 w-24 rounded bg-[#232820]" />
-          <div className="h-3 w-40 rounded bg-[#232820]" />
+          <div className="h-4 w-24 rounded bg-[#232820]" />
+          <div className="h-4 w-32 rounded bg-[#232820]" />
         </div>
 
-        <div className="h-6 w-6 rounded bg-[#232820]" />
+        <div className="h-6 w-6 rounded-full bg-[#232820]" />
       </div>
     </div>
   );

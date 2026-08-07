@@ -6,9 +6,11 @@ import FeaturedArticle from "../components/articles/FeaturedArticle.jsx";
 import ArticlesFeed from "../components/articles/ArticlesFeed.jsx";
 import { useEffect, useState } from "react";
 import { getArticles, getFeaturedArticle } from "../api/article.api";
+import ArticleCardSkeleton from "../components/articles/ArticleCardSkeleton.jsx";
+import FeaturedArticleSkeleton from "../components/articles/FeaturedArticleSkeleton";
 function Articles() {
   const [articles, setArticles] = useState([]);
-  const [featuredArticle, setFeaturedArticle] = useState('')
+  const [featuredArticle, setFeaturedArticle] = useState("");
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchArticles = async () => {
@@ -16,7 +18,7 @@ function Articles() {
         const response = await getArticles();
         const featuredResponse = await getFeaturedArticle();
         setArticles(response.articles);
-        setFeaturedArticle(featuredResponse.article)
+        setFeaturedArticle(featuredResponse.article);
       } catch (error) {
         console.error(error);
       } finally {
@@ -31,8 +33,12 @@ function Articles() {
       <div className="max-w-7xl mx-auto px-6 lg:px-10 mt-8 mb-14">
         <ArticleSearchBar />
       </div>
-      <section className="max-w-350 mx-auto px-6 lg:px-10 mt-8 mb-14">
-        <FeaturedArticle FeaturedArticle={featuredArticle}/>
+      <section className="max-w-full mx-auto px-4 sm:px-6 lg:px-10 mt-8 mb-14">
+        {loading ? (
+          <FeaturedArticleSkeleton />
+        ) : (
+          <FeaturedArticle FeaturedArticle={featuredArticle} />
+        )}
       </section>
 
       <section className="px-6 py-16 max-w-7xl mx-auto font-mono">
@@ -52,9 +58,15 @@ function Articles() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          <ArticlesFeed articles={articles}/>
-        </div>
+        {loading ? (
+          <div className="grid grid-cols-1 gap-5">
+            {[...Array(6)].map((_, index) => (
+              <ArticleCardSkeleton key={index} />
+            ))}
+          </div>
+        ) : (
+          <ArticlesFeed articles={articles} />
+        )}
       </section>
     </>
   );
