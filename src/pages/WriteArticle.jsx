@@ -116,7 +116,7 @@ function WriteArticle() {
     } catch (error) {
       console.error(error);
 
-      toast.promise(
+      toast.error(
         error.response?.data?.message ||
           `Failed to ${isEditing ? "update" : "publish"} article.`,
       );
