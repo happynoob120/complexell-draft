@@ -1,5 +1,7 @@
 import axios from "axios";
+import React from "react";
 import toast from "../utils/toast";
+import ValidationToast from "../components/toasts/ValidationToast";
 
 const api = axios.create({
   baseURL: "https://complexell-backend.onrender.com/api",
@@ -20,33 +22,8 @@ api.interceptors.response.use(
         const full = resp.data?.message || JSON.stringify(resp.data) || resp.statusText;
         const short = typeof full === "string" && full.length > 250 ? full.slice(0, 250) + "..." : full;
 
-        toast.custom(({ id }) => (
-          <div className="max-w-md px-4 py-3">
-            <div className="text-sm text-[#E4E6DE]">{short}</div>
-            {typeof full === "string" && full.length > 250 && (
-              <div className="mt-2 flex gap-2">
-                <button
-                  onClick={() => {
-                    navigator.clipboard.writeText(full);
-                    toast.success("Full details copied to clipboard");
-                  }}
-                  className="text-xs bg-[#11140D] border border-[#2A3025] px-3 py-1 rounded text-[#9FE6A0]"
-                >
-                  Copy Details
-                </button>
-
-                <button
-                  onClick={() => {
-                    toast.custom(() => <div className="max-w-lg px-4 py-3 text-sm text-[#E4E6DE]">{full}</div>, { duration: 20000 });
-                  }}
-                  className="text-xs bg-[#11140D] border border-[#2A3025] px-3 py-1 rounded text-[#9FE6A0]"
-                >
-                  View Details
-                </button>
-              </div>
-            )}
-          </div>
-        ));
+        // Use React.createElement to avoid JSX in this non-JSX file
+        toast.custom(() => React.createElement(ValidationToast, { full, short }));
       }
     }
 
