@@ -1,4 +1,4 @@
-import toast from "react-hot-toast";
+import toast from "./toast";
 
 export const ShareArticle = async (article) => {
   const url = `${window.location.origin}/articles/${article._id}`;

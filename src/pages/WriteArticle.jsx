@@ -4,7 +4,7 @@ import {
   updateArticle,
   getArticleForEdit,
 } from "../api/article.api";
-import toast from "react-hot-toast";
+import toast from "../utils/toast";
 import { useEditor } from "@tiptap/react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 

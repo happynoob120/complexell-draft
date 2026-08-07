@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { signup } from "../api/auth.api";
 import { useState } from "react";
-import toast from 'react-hot-toast'
+import toast from '../utils/toast'
 
 function Signup() {
   const [email, setEmail] = useState("");

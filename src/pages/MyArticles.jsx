@@ -4,6 +4,7 @@ import { TbPlus } from "react-icons/tb";
 
 import { getMyArticles, deleteArticle } from "../api/article.api";
 import MyArticleCard from "../components/articles/MyArticleCard";
+import toast from "../utils/toast";
 
 function MyArticles() {
   const [articles, setArticles] = useState([]);
