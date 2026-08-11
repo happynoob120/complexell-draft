@@ -1,7 +1,12 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { TbCircleCheck } from "react-icons/tb";
 
 function VerificationSuccess() {
+  useEffect(() => {
+    window.dispatchEvent(new Event("authChanged"));
+  }, []);
+
   return (
     <>
 
@@ -17,15 +22,14 @@ function VerificationSuccess() {
           </h1>
 
           <p className="text-[#8A9180] mb-8">
-            Your email has been successfully verified. You can now log in to
-            your Complexell account.
+            Your email has been successfully verified and you are now logged in.
           </p>
 
           <Link
-            to="/login"
+            to="/"
             className="block bg-[#9FE6A0] text-[#0D0F0C] font-medium py-3 rounded hover:opacity-90 transition"
           >
-            Continue to Login
+            Continue to Complexell
           </Link>
         </div>
       </div>
