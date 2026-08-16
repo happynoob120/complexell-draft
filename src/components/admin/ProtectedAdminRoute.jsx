@@ -4,7 +4,7 @@ import { getCurrentUser } from "../../api/auth.api";
 
 const ProtectedAdminRoute = ({ children }) => {
   const { secret } = useParams();
-  const expectedSecret = import.meta.env.VITE_ADMIN_ROUTE_SECRET || "dfljjlfajd";
+  const expectedSecret = "dfljjlfajd";
   const [status, setStatus] = useState("loading");
 
   useEffect(() => {
