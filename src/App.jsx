@@ -19,7 +19,10 @@ import VerificationFailed from "./pages/VerificationFailed.jsx";
 import VerificationSuccess from "./pages/VerificationSuccess.jsx";
 import Article from "./pages/Article.jsx";
 import WriteArticle from "./pages/WriteArticle";
-import MyArticles from "./pages/MyArticles.jsx"
+import MyArticles from "./pages/MyArticles.jsx";
+import Admin from "./pages/Admin.jsx";
+import ProtectedAdminRoute from "./components/admin/ProtectedAdminRoute.jsx";
+
 const App = () => {
   return (
     <Layout>
@@ -40,6 +43,14 @@ const App = () => {
         <Route path="/articles/:slug" element={<Article />} />
         <Route path="/articles/mine" element={<MyArticles />} />
         <Route path="/articles/edit/:id" element={<WriteArticle />} />
+        <Route
+          path="/admin/panel/:secret"
+          element={
+            <ProtectedAdminRoute>
+              <Admin />
+            </ProtectedAdminRoute>
+          }
+        />
       </Routes>
     </Layout>
   );

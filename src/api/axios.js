@@ -4,7 +4,7 @@ import toast from "../utils/toast";
 import ValidationToast from "../components/toasts/ValidationToast";
 
 const api = axios.create({
-  baseURL: "https://complexell-backend.onrender.com/api",
+  baseURL: import.meta.env.VITE_API_BASE_URL || "https://complexell-backend.onrender.com/api",
   headers: {
     "Content-Type": "application/json",
   },
