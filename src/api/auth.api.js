@@ -7,6 +7,11 @@ export const signup = async (userData) => {
 
 export const login = async (userData) => {
   const response = await api.post("/auth/login", userData);
+
+  if (response.data?.token) {
+    localStorage.setItem("authToken", response.data.token);
+  }
+
   return response.data;
 };
 
@@ -17,6 +22,7 @@ export const getCurrentUser = async () => {
 
 export const logout = async () => {
   const response = await api.post("/auth/logout");
+  localStorage.removeItem("authToken");
   return response.data;
 };
 
