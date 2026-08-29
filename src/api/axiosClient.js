@@ -3,9 +3,20 @@ import React from "react";
 import toast from "../utils/toast";
 import ValidationToast from "../components/toasts/ValidationToast";
 
+const getApiBaseUrl = () => {
+  const envBaseUrl = import.meta.env.VITE_API_BASE_URL;
+  if (envBaseUrl) return envBaseUrl;
+
+  const hostname = typeof window !== "undefined" ? window.location.hostname : "";
+  if (hostname === "localhost" || hostname === "127.0.0.1") {
+    return "http://localhost:3000/api";
+  }
+
+  return "https://complexell-backend.onrender.com/api";
+};
+
 const api = axios.create({
-  baseURL:
-    import.meta.env.VITE_API_BASE_URL || "https://complexell-backend.onrender.com/api",
+  baseURL: getApiBaseUrl(),
   headers: {
     "Content-Type": "application/json",
   },
