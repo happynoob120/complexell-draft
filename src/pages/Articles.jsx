@@ -1,7 +1,5 @@
-import AddressBar from "../components/layout/AddressBar.jsx";
 import ArticleCard from "../components/layout/ArticleCard.jsx";
 import ArticleSearchBar from "../components/articles/Articlesearchbar.jsx";
-import Button from "../components/articles/ArticleButton.jsx";
 import FeaturedArticle from "../components/articles/FeaturedArticle.jsx";
 import ArticlesFeed from "../components/articles/ArticlesFeed.jsx";
 import { useEffect, useState, useCallback } from "react";
@@ -15,8 +13,14 @@ function Articles() {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(false);
   const [query, setQuery] = useState("");
+  const hasActiveSearch = query.trim().length > 0;
+
   useEffect(() => {
     const fetchFeatured = async () => {
+      if (hasActiveSearch) {
+        return;
+      }
+
       try {
         const featuredResponse = await getFeaturedArticle();
         setFeaturedArticle(featuredResponse.article);
@@ -26,7 +30,7 @@ function Articles() {
     };
 
     fetchFeatured();
-  }, []);
+  }, [hasActiveSearch]);
 
   const fetchPage = useCallback(
     async (p = 1, q = "", append = false) => {
@@ -60,13 +64,15 @@ function Articles() {
       <div className="max-w-7xl mx-auto px-6 lg:px-10 mt-8 mb-14">
         <ArticleSearchBar onSearch={setQuery} initialQuery={query} />
       </div>
-      <section className="max-w-full mx-auto px-4 sm:px-6 lg:px-10 mt-8 mb-14">
-        {loading ? (
-          <FeaturedArticleSkeleton />
-        ) : (
-          <FeaturedArticle FeaturedArticle={featuredArticle} />
-        )}
-      </section>
+      {!hasActiveSearch && (
+        <section className="max-w-full mx-auto px-4 sm:px-6 lg:px-10 mt-8 mb-14">
+          {loading ? (
+            <FeaturedArticleSkeleton />
+          ) : (
+            <FeaturedArticle FeaturedArticle={featuredArticle} />
+          )}
+        </section>
+      )}
 
       <section className="px-6 py-16 max-w-7xl mx-auto font-mono">
         <div className="flex items-end justify-between mb-12">

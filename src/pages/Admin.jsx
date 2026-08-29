@@ -6,7 +6,7 @@ import {
   getAdminUsers,
   unbanUser,
 } from "../api/admin.api";
-import api from "../api/axios";
+import api from "../api/axiosClient";
 
 const Admin = () => {
   const [data, setData] = useState(null);

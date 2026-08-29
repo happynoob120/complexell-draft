@@ -73,10 +73,6 @@ function PricingTeaser() {
               <TbCheck size={14} className="text-[#9FE6A0]" />
               priority new fixes
             </li>
-            <li className="flex items-center gap-2 text-sm text-[#8A9180]">
-              <TbCheck size={14} className="text-[#9FE6A0]" />
-              early AI assistant access
-            </li>
           </ul>
 
           <Link

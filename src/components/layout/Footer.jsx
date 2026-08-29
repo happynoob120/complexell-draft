@@ -32,7 +32,6 @@ function Footer() {
             <ul className="space-y-2.5">
               <li><Link to="/articles" className="text-[#8A9180] hover:text-[#E4E6DE] text-sm transition-colors">articles</Link></li>
               <li><Link to="/pricing" className="text-[#8A9180] hover:text-[#E4E6DE] text-sm transition-colors">pricing</Link></li>
-              <li><Link to="/assistant" className="text-[#8A9180] hover:text-[#E4E6DE] text-sm transition-colors">ai assistant</Link></li>
             </ul>
           </div>
 

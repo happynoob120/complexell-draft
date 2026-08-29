@@ -1,11 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { login } from "../api/auth.api";
+import { login, resendVerification } from "../api/auth.api";
 import toast from "../utils/toast";
 
 function Login() {
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
+  const [verificationRequired, setVerificationRequired] = useState(false);
+  const [resending, setResending] = useState(false);
 
   const navigate = useNavigate();
 
@@ -19,6 +21,7 @@ function Login() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setVerificationRequired(false);
     toast.loading("Please Wait...")
 
     try {
@@ -32,14 +35,36 @@ function Login() {
       setIdentifier("");
       setPassword("");
 
-      // Force refresh so Navbar fetches the current user
-      window.location.href = "/";
-      // OR (after implementing AuthContext later)
-      // navigate("/");
+      // Notify other UI parts (Navbar) and navigate without a full reload so toast is visible
+      window.dispatchEvent(new Event("authChanged"));
+      navigate("/");
     } catch (error) {
-      toast.error(
-        error.response?.data?.message || "Failed to login."
-      );
+      const message = error.response?.data?.message || "Failed to login.";
+
+      if (message.toLowerCase().includes("verify your email")) {
+        setVerificationRequired(true);
+      }
+
+      toast.error(message);
+    }
+  };
+
+  const handleResendVerification = async () => {
+    const email = identifier.trim();
+
+    if (!email || !email.includes("@")) {
+      toast.error("Please enter your email address to resend the verification link.");
+      return;
+    }
+
+    setResending(true);
+    try {
+      const response = await resendVerification(email);
+      toast.success(response.message || "Verification email sent again.");
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Failed to resend verification email.");
+    } finally {
+      setResending(false);
     }
   };
 
@@ -70,6 +95,23 @@ function Login() {
             <p className="text-[#8A9180] text-sm mb-8">
               welcome back. enter your details below.
             </p>
+
+            {verificationRequired && (
+              <div className="mb-5 rounded-md border border-[#B58A3C] bg-[#1B160F] p-4 text-sm text-[#F0D39A]">
+                <p className="font-medium text-[#F7E2B2]">Verify your email to continue</p>
+                <p className="mt-2 leading-6 text-[#E7C98A]">
+                  We sent a verification link when you signed up. Check your inbox and spam folder, then try again.
+                </p>
+                <button
+                  type="button"
+                  onClick={handleResendVerification}
+                  disabled={resending}
+                  className="mt-3 rounded border border-[#D7A94A] bg-[#2A2013] px-3 py-1.5 text-xs font-medium text-[#F7E2B2] transition hover:bg-[#382b18] disabled:cursor-not-allowed disabled:opacity-60"
+                >
+                  {resending ? "Sending..." : "Resend verification email"}
+                </button>
+              </div>
+            )}
 
             <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
               <div>

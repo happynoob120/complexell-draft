@@ -150,20 +150,20 @@ function Navbar() {
           </Link>
 
           <Link
-            to="/pricing"
+          to="/pricing"
             className="flex items-center gap-1.5 text-[#8A9180] hover:text-[#E4E6DE]"
           >
-            <TbTag size={14} />
-            pricing
+          <TbTag size={14} />
+          pricing
           </Link>
 
-          <Link
-            to="/about"
-            className="flex items-center gap-1.5 text-[#8A9180] hover:text-[#E4E6DE]"
-          >
-            <TbInfoCircle size={14} />
-            about
-          </Link>
+        <Link
+          to="/about"
+          className="flex items-center gap-1.5 text-[#8A9180] hover:text-[#E4E6DE]"
+        >
+          <TbInfoCircle size={14} />
+          about
+        </Link>
         </div>
       </div>{" "}
       {/* Mobile Menu */}

@@ -1,6 +1,5 @@
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import BetaBanner from "../beta/Banner";
 
 function Layout({ children }) {
   return (

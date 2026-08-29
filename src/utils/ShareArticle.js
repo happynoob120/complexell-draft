@@ -1,7 +1,8 @@
 import toast from "./toast";
 
 export const ShareArticle = async (article) => {
-  const url = `${window.location.origin}/articles/${article._id}`;
+  const slug = article?.slug || article?._id;
+  const url = `${window.location.origin}/articles/${slug}`;
 
   if (navigator.share) {
     try {

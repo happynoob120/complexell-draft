@@ -1,4 +1,4 @@
-import api from "./axios";
+import api from "./axiosClient";
 
 export const createArticle = async (articleData) => {
   const response = await api.post("/articles", articleData);

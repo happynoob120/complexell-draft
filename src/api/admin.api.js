@@ -1,4 +1,4 @@
-import api from "./axios";
+import api from "./axiosClient";
 
 export const getAdminOverview = async () => {
   const response = await api.get("/admin/overview");
