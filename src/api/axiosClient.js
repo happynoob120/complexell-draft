@@ -4,15 +4,10 @@ import toast from "../utils/toast";
 import ValidationToast from "../components/toasts/ValidationToast";
 
 const getApiBaseUrl = () => {
-  const envBaseUrl = import.meta.env.VITE_API_BASE_URL;
-  if (envBaseUrl) return envBaseUrl;
+  // Vite proxies relative /api requests to the local backend during development.
+  if (import.meta.env.DEV) return "/api";
 
-  const hostname = typeof window !== "undefined" ? window.location.hostname : "";
-  if (hostname === "localhost" || hostname === "127.0.0.1") {
-    return "http://localhost:3000/api";
-  }
-
-  return "https://complexell-backend.onrender.com/api";
+  return import.meta.env.VITE_API_BASE_URL || "/api";
 };
 
 const api = axios.create({

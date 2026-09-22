@@ -1,0 +1,226 @@
+/* ------------------------------------------------------------------
+   home page — ambient gradient glows + entrance animations
+------------------------------------------------------------------ */
+
+.home-shell {
+  position: relative;
+  overflow-x: clip;
+  background-color: #0d0f0c;
+}
+
+.home-ambient {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.home-blob {
+  position: absolute;
+  border-radius: 100px;
+  filter: blur(110px);
+  opacity: .55;
+  will-change: transform;
+}
+
+.home-blob-a {
+  top: -160px;
+  left: 50%;
+  width: min(760px, 92vw);
+  height: 460px;
+  transform: translateX(-50%);
+  background: radial-gradient(circle at 50% 50%, rgba(159, 230, 160, .38), rgba(159, 230, 160, 0) 70%);
+  animation: home-drift-a 18s ease-in-out infinite;
+}
+
+.home-blob-b {
+  top: 38%;
+  right: -180px;
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle at 50% 50%, rgba(107, 138, 74, .35), rgba(107, 138, 74, 0) 70%);
+  animation: home-drift-b 22s ease-in-out infinite;
+}
+
+.home-blob-c {
+  top: 72%;
+  left: -200px;
+  width: 560px;
+  height: 560px;
+  background: radial-gradient(circle at 50% 50%, rgba(228, 178, 118, .16), rgba(228, 178, 118, 0) 70%);
+  animation: home-drift-a 26s ease-in-out infinite reverse;
+}
+
+.home-blob-d {
+  bottom: -220px;
+  left: 50%;
+  width: min(880px, 96vw);
+  height: 480px;
+  transform: translateX(-50%);
+  background: radial-gradient(circle at 50% 50%, rgba(159, 230, 160, .22), rgba(159, 230, 160, 0) 72%);
+  animation: home-drift-b 20s ease-in-out infinite reverse;
+}
+
+/* faint code grid — runs the full height of the page with a slow crawl */
+.home-grid-overlay {
+  --grid: 62px;
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(159, 230, 160, .05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(159, 230, 160, .05) 1px, transparent 1px);
+  background-size: var(--grid) var(--grid);
+  opacity: .85;
+  animation: home-grid-drift 34s linear infinite;
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, .95) 0%,
+    rgba(0, 0, 0, .62) 42%,
+    rgba(0, 0, 0, .55) 72%,
+    rgba(0, 0, 0, .9) 100%
+  );
+  mask-image: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, .95) 0%,
+    rgba(0, 0, 0, .62) 42%,
+    rgba(0, 0, 0, .55) 72%,
+    rgba(0, 0, 0, .9) 100%
+  );
+}
+
+/* ------------------------------------------------------------------
+   scroll reveal
+------------------------------------------------------------------ */
+
+.home-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity .75s cubic-bezier(.22, 1, .36, 1),
+    transform .75s cubic-bezier(.22, 1, .36, 1);
+}
+
+.home-reveal-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* one-shot entrance for above-the-fold content */
+.home-fade-up {
+  animation: home-fade-up .85s cubic-bezier(.22, 1, .36, 1) both;
+}
+
+.home-glow-ring {
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  width: min(680px, 90vw);
+  height: 220px;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse at 50% 50%, rgba(159, 230, 160, .22), rgba(159, 230, 160, 0) 70%);
+  filter: blur(60px);
+  animation: home-breathe 6s ease-in-out infinite;
+}
+
+/* ------------------------------------------------------------------
+   card flourishes
+------------------------------------------------------------------ */
+
+.home-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform .35s cubic-bezier(.22, 1, .36, 1), border-color .35s ease, box-shadow .35s ease;
+}
+
+.home-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(420px circle at 50% 0%, rgba(159, 230, 160, .12), transparent 65%);
+  opacity: 0;
+  transition: opacity .4s ease;
+  pointer-events: none;
+}
+
+.home-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 45px rgba(0, 0, 0, .45);
+}
+
+.home-card:hover::after { opacity: 1; }
+
+.home-cta {
+  position: relative;
+  box-shadow: 0 0 0 rgba(159, 230, 160, 0);
+  transition: transform .25s ease, box-shadow .35s ease, opacity .25s ease;
+}
+
+.home-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(159, 230, 160, .28);
+}
+
+/* ------------------------------------------------------------------
+   keyframes
+------------------------------------------------------------------ */
+
+@keyframes home-fade-up {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes home-grid-drift {
+  from { background-position: 0 0; }
+  to { background-position: var(--grid) var(--grid); }
+}
+
+@keyframes home-drift-a {
+  0%, 100% { transform: translate(-50%, 0) scale(1); }
+  50% { transform: translate(-50%, 36px) scale(1.08); }
+}
+
+@keyframes home-drift-b {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-30px, -34px) scale(1.1); }
+}
+
+@keyframes home-breathe {
+  0%, 100% { opacity: .55; }
+  50% { opacity: 1; }
+}
+
+/* ------------------------------------------------------------------
+   responsive + motion preferences
+------------------------------------------------------------------ */
+
+@media (max-width: 768px) {
+  .home-blob { filter: blur(80px); opacity: .45; }
+  .home-blob-b, .home-blob-c { width: 380px; height: 380px; }
+  .home-grid-overlay { --grid: 46px; opacity: .7; }
+  .home-card:hover { transform: none; }
+}
+
+@media (min-width: 1024px) {
+  .home-shell { background:
+    radial-gradient(60% 40% at 50% 0%, rgba(159, 230, 160, .06), transparent 60%),
+    #0d0f0c;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-reveal,
+  .home-fade-up,
+  .home-blob,
+  .home-glow-ring {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .home-blob-a,
+  .home-blob-d { transform: translateX(-50%) !important; }
+
+  .home-grid-overlay { animation: none !important; }
+}

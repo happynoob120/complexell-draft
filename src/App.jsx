@@ -22,6 +22,7 @@ import WriteArticle from "./pages/WriteArticle";
 import MyArticles from "./pages/MyArticles.jsx";
 import Admin from "./pages/Admin.jsx";
 import ProtectedAdminRoute from "./components/admin/ProtectedAdminRoute.jsx";
+import CodeDebugger from "./pages/CodeDebugger.jsx";
 
 const App = () => {
   return (
@@ -35,6 +36,7 @@ const App = () => {
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/articles" element={<Articles />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/codedebug" element={<CodeDebugger />} />
         <Route path="*" element={<ErrNotFound />} />
         <Route path="/verification-success" element={<VerificationSuccess />} />
         <Route path="/verification-failed" element={<VerificationFailed />} />

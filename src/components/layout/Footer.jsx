@@ -18,10 +18,10 @@ function Footer() {
                   <span className="text-[#9FE6A0] text-lg font-medium">complexell</span>
                   <span className="text-[#3A4036] text-sm">.souel.in</span>
                 </span>
-                <span className="text-[#DCE6CF] font-semibold uppercase tracking-[0.22em] text-[11px] md:text-xs mt-0.5">an enterprise of Souel</span>
+                <span className="text-[#DCE6CF] font-semibold uppercase tracking-[0.22em] text-[13px] md:text-sm mt-0.5">an enterprise of Souel</span>
               </div>
             </Link>
-            <p className="text-[#8A9180] text-sm leading-relaxed max-w-xs">
+            <p className="text-[#C4CCC0] text-sm leading-relaxed max-w-xs">
               curated, stack-specific fixes for developers who'd rather ship than search.
             </p>
           </div>
@@ -31,6 +31,7 @@ function Footer() {
             <h4 className="text-[#E4E6DE] text-xs font-medium mb-4">product</h4>
             <ul className="space-y-2.5">
               <li><Link to="/articles" className="text-[#8A9180] hover:text-[#E4E6DE] text-sm transition-colors">articles</Link></li>
+              <li><Link to="/codedebug" className="text-[#8A9180] hover:text-[#E4E6DE] text-sm transition-colors">ai debugger</Link></li>
               <li><Link to="/pricing" className="text-[#8A9180] hover:text-[#E4E6DE] text-sm transition-colors">pricing</Link></li>
             </ul>
           </div>
@@ -57,7 +58,7 @@ function Footer() {
 
         {/* Bottom bar */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 pt-6 border-t border-[#1A1D16]">
-          <span className="text-[#5C6358] text-xs">
+              <span className="text-[#A1A1AA] text-sm">
             © 2026 complexell. all rights reserved.
           </span>
 

@@ -4,11 +4,11 @@ import {
   TbFileText,
   TbTag,
   TbInfoCircle,
-  TbSearch,
   TbMenu2,
   TbX,
   TbUserCircle,
   TbLogout,
+  TbBug,
 } from "react-icons/tb";
 
 import logoIcon from "../../assets/logo-icon.png";
@@ -116,7 +116,7 @@ function Navbar() {
             </div>
           ) : (
             <>
-              <Link to="/login" className="text-[#8A9180] hover:text-[#E4E6DE]">
+              <Link to="/login" className="text-[#C4CCC0] hover:text-[#E4E6DE]">
                 login
               </Link>
 
@@ -150,8 +150,19 @@ function Navbar() {
           </Link>
 
           <Link
+            to="/codedebug"
+            className="flex items-center gap-1.5 text-[#C4CCC0] hover:text-[#E4E6DE]"
+          >
+            <TbBug size={14} />
+            debugger
+            <span className="text-[9px] uppercase tracking-wider text-[#0D0F0C] bg-[#9FE6A0] px-1.5 py-0.5 rounded">
+              new
+            </span>
+          </Link>
+
+          <Link
           to="/pricing"
-            className="flex items-center gap-1.5 text-[#8A9180] hover:text-[#E4E6DE]"
+            className="flex items-center gap-1.5 text-[#C4CCC0] hover:text-[#E4E6DE]"
           >
           <TbTag size={14} />
           pricing
@@ -159,7 +170,7 @@ function Navbar() {
 
         <Link
           to="/about"
-          className="flex items-center gap-1.5 text-[#8A9180] hover:text-[#E4E6DE]"
+          className="flex items-center gap-1.5 text-[#C4CCC0] hover:text-[#E4E6DE]"
         >
           <TbInfoCircle size={14} />
           about
@@ -180,6 +191,18 @@ function Navbar() {
             >
               <TbFileText size={18} />
               <span>Articles</span>
+            </Link>
+
+            <Link
+              to="/codedebug"
+              onClick={closeMobileMenu}
+              className="flex items-center gap-3 px-2 py-3 rounded text-[#E4E6DE] hover:bg-[#15180F]"
+            >
+              <TbBug size={18} />
+              <span>Debugger</span>
+              <span className="text-[9px] uppercase tracking-wider text-[#0D0F0C] bg-[#9FE6A0] px-1.5 py-0.5 rounded">
+                new
+              </span>
             </Link>
 
             <Link
